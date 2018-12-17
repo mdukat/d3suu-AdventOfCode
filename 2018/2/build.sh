@@ -1,3 +1,3 @@
 #!/bin/bash 
-exec gcc -g -o checksum *.c
+gcc -g -o checksum_part1 checksum_part1.c
 echo "Done!"
