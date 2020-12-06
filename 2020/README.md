@@ -14,5 +14,5 @@ When vim buffer is only input data:
 :%s/^/"/
 :%s/$/",/
 gg0ichar* datain[] = {<ESC>
-G$dhA};<ESC>
+G$dlA};<ESC>
 ```
