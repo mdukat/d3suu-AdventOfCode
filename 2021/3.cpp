@@ -4,6 +4,21 @@
 
 using namespace std;
 
+vector<string> sanity = {
+    "00100",
+"11110",
+"10110",
+"10111",
+"10101",
+"01111",
+"00111",
+"11100",
+"10000",
+"11001",
+"00010",
+"01010"
+};
+
 vector<string> input = {
 "011001101000",
 "010101111100",
@@ -1007,94 +1022,190 @@ vector<string> input = {
 "101001110110"
 };
 
+using namespace std;
+
 int main()
 {
-    cout<<"Hello World"<<endl;
-    
+    std::cout << "Hello World!\n";
+
     int dataLength = input[0].size();
     cout << "Data Length: " << dataLength << endl;
-    
+
     vector<int> gamma;
     vector<int> epsilon; // !gamma
-    
-    for(int i = 0; i<dataLength; i++){
+
+    for (int i = 0; i < dataLength; i++) {
         int one = 0;
         int zero = 0;
-        for(int j = 0; j<input.size(); j++){
+        for (int j = 0; j < input.size(); j++) {
             //cout << input[j][i] << endl;
-            if(input[j][i] == '1'){
+            if (input[j][i] == '1') {
                 one++;
-            }else{
+            }
+            else {
                 zero++;
             }
         }
-        if(one>zero){
+        if (one > zero) {
             gamma.push_back(1);
             epsilon.push_back(0);
-        }else{
+        }
+        else {
             gamma.push_back(0);
             epsilon.push_back(1);
         }
     }
-    
-    
+
+
     // Show gamma and epsilon
     cout << "Gamma:   \t";
-    for(int i = 0; i<gamma.size(); i++){
+    for (int i = 0; i < gamma.size(); i++) {
         cout << gamma[i];
     }
     cout << endl << "Epsilon:\t";
-    for(int i = 0; i<epsilon.size(); i++){
+    for (int i = 0; i < epsilon.size(); i++) {
         cout << epsilon[i];
     }
     cout << endl;
-    
-    
+
+
     // gamma to int
     int gamma_i = 0;
-    for(int i = 0; i<gamma.size(); i++){
-        gamma_i += gamma[i]<<(gamma.size()-1-i);
+    for (int i = 0; i < gamma.size(); i++) {
+        gamma_i += gamma[i] << (gamma.size() - 1 - i);
     }
     cout << "Gamma int: " << gamma_i << endl;
     int epsilon_i = 0;
-    for(int i = 0; i<epsilon.size(); i++){
-        epsilon_i += epsilon[i]<<(epsilon.size()-1-i);
+    for (int i = 0; i < epsilon.size(); i++) {
+        epsilon_i += epsilon[i] << (epsilon.size() - 1 - i);
     }
     cout << "Epsilon int: " << epsilon_i << endl;
-    
+
     cout << "*Power consumption: " << gamma_i * epsilon_i << endl;
     
-    // Oxygen generator rating
-    // This is wrong, AoC, why did you make such complex part 2? I understand it's algorithmic, but it's too long.
-    vector<string> buffer1 = input;
     
-    for(int i = 0; i<buffer1[0].size(); i++){
-        vector<string> buffer2;
+    // Part 2, here we go
+    // Oxygen Generator Rating
+    //vector<string> buffer = sanity; // for switching between sanity and input
+    vector<string> buffer = input;
+    char bitCriteria = '0';
+    int bitNumber = 0;
+    while(buffer.size() > 1){
+        // find bit criteria
         int one = 0;
         int zero = 0;
-        for(int j = 0; j<buffer1.size(); j++){
-            if(buffer1[j][i] = '1'){
+        for(int i = 0; i<buffer.size(); i++){
+            if(buffer[i][bitNumber] == '1'){
                 one++;
             }else{
                 zero++;
             }
         }
-        char val = '0';
-        if(one>zero){
-            val = '1';
-        }else{
-            val = '0';
+        
+        //bitCriteria = one>zero ? '1' : '0';
+        if(one > zero)
+            bitCriteria = '1';
+        else
+            bitCriteria = '0';
+            
+        if(one == zero)
+            bitCriteria = '1';
+        
+        // DEBUG
+        //cout << "bitCriteria: " << bitCriteria << endl;
+        
+        // sort vector
+        //int removed = 0;
+        for(int i = 0; i<buffer.size() /* - removed */; i++){
+            if(buffer[i][bitNumber] != bitCriteria){
+                //removed++;
+                buffer.erase(buffer.begin() + i);
+                i--;
+            }
         }
-        for(int j = 0; j<buffer1.size(); j++){
-            if(buffer1[j][i] == val)
-                buffer2.push_back(buffer1[j]);
+        
+#ifdef SANITY_CHECK
+        // sanity check
+        cout << "Nowy buffer: " << buffer.size() << endl;
+        for(int i = 0; i<buffer.size(); i++){
+            cout << buffer[i] << endl;
         }
-        buffer1 = buffer2;
-        if(buffer1.size() == 1)
-            break;
+#endif
+        
+        bitNumber++;
     }
     
-    cout << buffer1[0] << endl;
+    string oxygenRating = buffer[0];
     
-    return 0;
+    // CO2 Scrubber Rating
+    //buffer = sanity; // for switching between sanity and input
+    buffer = input;
+    bitCriteria = '0';
+    bitNumber = 0;
+    while(buffer.size() > 1){
+        // find bit criteria
+        int one = 0;
+        int zero = 0;
+        for(int i = 0; i<buffer.size(); i++){
+            if(buffer[i][bitNumber] == '1'){
+                one++;
+            }else{
+                zero++;
+            }
+        }
+        
+        //bitCriteria = one>zero ? '1' : '0';
+        if(one > zero)
+            bitCriteria = '0';
+        else
+            bitCriteria = '1';
+            
+        if(one == zero)
+            bitCriteria = '0';
+        
+        // DEBUG
+        //cout << "bitCriteria: " << bitCriteria << endl;
+        
+        // sort vector
+        //int removed = 0;
+        for(int i = 0; i<buffer.size() /* - removed */; i++){
+            if(buffer[i][bitNumber] != bitCriteria){
+                //removed++;
+                buffer.erase(buffer.begin() + i);
+                i--;
+            }
+        }
+        
+#ifdef SANITY_CHECK
+        // sanity check
+        cout << "Nowy buffer: " << buffer.size() << endl;
+        for(int i = 0; i<buffer.size(); i++){
+            cout << buffer[i] << endl;
+        }
+#endif
+        
+        bitNumber++;
+    }
+    
+    string CO2Rating = buffer[0];
+    
+    cout << "Oxygen Generator Rating:\t" << oxygenRating << endl;
+    cout << "CO2 Scrubber Rating:\t\t" << CO2Rating << endl;
+    
+    
+    // These could be functions, but I don't care on this level
+    
+    int oxygen_i = 0;
+    for (int i = 0; i < oxygenRating.size(); i++) {
+        oxygen_i += (oxygenRating[i]-'0') << (oxygenRating.size() - 1 - i);
+    }
+    
+    int co2_i = 0;
+    for (int i = 0; i < CO2Rating.size(); i++) {
+        co2_i += (CO2Rating[i]-'0') << (CO2Rating.size() - 1 - i);
+    }
+    
+    cout << "Integers: " << oxygen_i << " " << co2_i << endl;
+    cout << "Life Support Rating: " << oxygen_i * co2_i << endl;
+    
 }
