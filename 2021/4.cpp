@@ -18,7 +18,7 @@ class bingoCard {
     int rowsWritten = 0;
     public:
         bingoCard();
-        //void writeBingo(int row[5]);
+        void writeBingo(int row[5]);
         //int isBingoWon();
         //void addNumber(int number);
         //void showBingo();
@@ -34,11 +34,57 @@ bingoCard::bingoCard(){
     }
 }
 
+void bingoCard::writeBingo(int row[5]){
+    int cRow = rowsWritten;
+    for(int i = 0; i<5; i++){
+        bingo[cRow][i] = row[i];
+    }
+}
+
 int main()
 {
     cout<<"Hello World"<<endl;
     
     // Write bingo cards
-
+    ifstream is("day4sanity.txt");
+    string line;
+    int bingoN = 0;
+    int lineN = 0;
+    
+    vector<bingoCard> cards;
+    
+    while(getline(is, line)){
+        
+        istringstream iss(line);
+        
+        iss.seekg(0, ios::end);
+        //cout << "Line: " << iss.tellg() << endl;
+        
+        if(iss.tellg() == 0){
+            bingoN++;
+            continue;
+        }
+        
+        iss.seekg(0, ios::beg);
+        
+        int arr[5];
+        iss >> arr[0] >> arr[1] >> arr[2] >> arr[3] >> arr[4];
+        
+        /*
+        for(int i = 0; i<5; i++){
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+        */
+        
+        if(lineN == 0)
+            cards.push_back(bingoCard());
+        
+        cards[bingoN].writeBingo(arr);
+        
+        lineN++;
+        
+    }
+    
     return 0;
 }
