@@ -90,34 +90,42 @@ int main()
         
         if(values[0] == values[2]){ // only horizontal
             if(values[1] < values[3]){
+                cout << "Parsed by 92" << endl;
                 for(int i = values[1]; i<=values[3]; i++){
                     world[i][values[0]]++;
                 }
             }
             if(values[1] > values[3]){
+                cout << "Parsed by 99" << endl;
                 for(int i = values[1]; i>=values[3]; i--){
                     world[i][values[0]]++;
                 }
             }
             if(values[1] == values[3]){
+                cout << "Parsed by 105" << endl;
                 world[values[1]][values[0]]++;
             }
+            continue;
         }
         
         if(values[1] == values[3]){ // only vertical
             if(values[0] < values[2]){
+                cout << "Parsed by 113" << endl;
                 for(int i = values[0]; i<=values[2]; i++){
                     world[values[1]][i]++;
                 }
             }
             if(values[0] > values[2]){
+                cout << "Parsed by 119" << endl;
                 for(int i = values[0]; i>=values[2]; i--){
                     world[values[1]][i]++;
                 }
             }
             if(values[0] == values[2]){
+                cout << "Parsed by 125" << endl;
                 world[values[0]][values[2]]++;
             }
+            continue;
         }
         
         // diagonal
@@ -126,8 +134,11 @@ int main()
         int x2 = values[2];
         int y2 = values[3];
         
+        //cout << "Diagonal " << x1 << ',' << y1 << " -> " << x2 << ',' << y2 << endl;
+        
         if(x1 < x2){
             if(y1 < y2){
+                cout << "Parsed by 141" << endl;
                 int X = x1;
                 int Y = y1;
                 while((X <= x2) && (Y <= y2)){
@@ -139,6 +150,7 @@ int main()
             
             // Something is wrong here
             if(y1 > y2){
+                cout << "Parsed by 153" << endl;
                 //cout << "Diagonal " << x1 << ',' << y1 << " -> " << x2 << ',' << y2 << endl;
                 int X = x1;
                 int Y = y1;
@@ -154,6 +166,7 @@ int main()
         
         if(x1 > x2){
             if(y1 < y2){
+                cout << "Parsed by 169" << endl;
                 int X = x1;
                 int Y = y1;
                 while((X >= x2) && (Y <= y2)){
@@ -165,6 +178,7 @@ int main()
             
             // Something is wrong here
             if(y1 > y2){
+                cout << "Parsed by 181" << endl;
                 //cout << "Diagonal " << x1 << ',' << y1 << " -> " << x2 << ',' << y2 << endl;
                 int X = x1;
                 int Y = y1;
