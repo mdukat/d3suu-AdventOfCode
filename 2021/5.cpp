@@ -8,17 +8,19 @@
 
 using namespace std;
 
+#define WSIZE 1000
+
 int main()
 {
     cout<<"Hello World"<<endl;
     
-    // sanity
-    int world[10][10];
-    for(int i = 0; i<10; i++){
-        for(int j = 0; j<10; j++)
+    int world[WSIZE][WSIZE];
+    for(int i = 0; i<WSIZE; i++){
+        for(int j = 0; j<WSIZE; j++)
             world[i][j] = 0;
     }
     
+    int overlap = 0;
     int EOI = 0;
     
     while(EOI != 1){
@@ -123,12 +125,16 @@ int main()
     }
     
     // print world
-    for(int i = 0; i<10; i++){
-        for(int j = 0; j<10; j++){
+    for(int i = 0; i<WSIZE; i++){
+        for(int j = 0; j<WSIZE; j++){
             cout << world[i][j];
+            if(world[i][j] >= 2)
+                overlap++;
         }
         cout << endl;
     }
+    
+    cout << "Overlap: " << overlap << endl;
 
     return 0;
 }
