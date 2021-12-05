@@ -84,6 +84,50 @@ int main()
         
         cout << values[0] << ' ' << values[1] << ' ' << values[2] << ' ' << values[3] << ' ' << endl;
         
+        // Work on world
+        
+        if(values[0] == values[2]){ // only horizontal
+            if(values[1] < values[3]){
+                for(int i = values[1]; i<=values[3]; i++){
+                    world[i][values[0]]++;
+                }
+            }
+            if(values[1] > values[3]){
+                for(int i = values[1]; i>=values[3]; i--){
+                    world[i][values[0]]++;
+                }
+            }
+            if(values[1] == values[3]){
+                world[values[1]][values[0]]++;
+            }
+        }
+        
+        if(values[1] == values[3]){ // only vertical
+            if(values[0] < values[2]){
+                for(int i = values[0]; i<=values[2]; i++){
+                    world[values[1]][i]++;
+                }
+            }
+            if(values[0] > values[2]){
+                for(int i = values[0]; i>=values[2]; i--){
+                    world[values[1]][i]++;
+                }
+            }
+            if(values[0] == values[2]){
+                world[values[0]][values[2]]++;
+            }
+        }
+        
+        
+        
+    }
+    
+    // print world
+    for(int i = 0; i<10; i++){
+        for(int j = 0; j<10; j++){
+            cout << world[i][j];
+        }
+        cout << endl;
     }
 
     return 0;
