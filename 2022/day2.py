@@ -24,25 +24,30 @@ for data in dataArray:
 
     if data[1] in ROCK:
         if data[0] in ROCK:
-            score += DRAW + ROCKv
+            score += DRAW
         elif data[0] in PAPER:
-            score += LOSS + ROCKv
+            score += LOSS
         elif data[0] in SCISSORS:
-            score += WIN + ROCKv
+            score += WIN
+        score += ROCKv
+
     elif data[1] in PAPER:
         if data[0] in ROCK:
-            score += WIN + PAPERv
+            score += WIN
         elif data[0] in PAPER:
-            score += DRAW + PAPERv
+            score += DRAW
         elif data[0] in SCISSORS:
-            score += LOSS + PAPERv
+            score += LOSS
+        score += PAPERv
+
     elif data[1] in SCISSORS:
         if data[0] in ROCK:
-            score += LOSS + SCISSORSv
+            score += LOSS
         elif data[0] in PAPER:
-            score += WIN + SCISSORSv
+            score += WIN
         elif data[0] in SCISSORS:
-            score += DRAW + SCISSORSv
+            score += DRAW
+        score += SCISSORSv
 
 print("Part 1: " + str(score))
 
@@ -62,24 +67,29 @@ for data in dataArray:
 
     if data[1] == NWIN:
         if data[0] in ROCK:
-            score += WIN + PAPERv
+            score += PAPERv
         elif data[0] in PAPER:
-            score += WIN + SCISSORSv
+            score += SCISSORSv
         elif data[0] in SCISSORS:
-            score += WIN + ROCKv
+            score += ROCKv
+        score += WIN
+
     elif data[1] == NDRAW:
         if data[0] in ROCK:
-            score += DRAW + ROCKv
+            score += ROCKv
         elif data[0] in PAPER:
-            score += DRAW + PAPERv
+            score += PAPERv
         elif data[0] in SCISSORS:
-            score += DRAW + SCISSORSv
+            score += SCISSORSv
+        score += DRAW
+
     elif data[1] == NLOSS:
         if data[0] in ROCK:
-            score += LOSS + SCISSORSv
+            score += SCISSORSv
         elif data[0] in PAPER:
-            score += LOSS + ROCKv
+            score += ROCKv
         elif data[0] in SCISSORS:
-            score += LOSS + PAPERv
+            score += PAPERv
+        score += LOSS
 
 print("Part 2: " + str(score))
