@@ -38,8 +38,9 @@ for i in range(0, len(data), 3):
     rucksackGroups.append(data[i:i+3])
 
 for rucksackGroup in rucksackGroups:  # For each group of 3 rucksacks
-    for item in rucksackGroup[0].replace('\n', ''):  # Fixme: replace for each string in group
-        if item in rucksackGroup[1].replace('\n', '') and item in rucksackGroup[2].replace('\n', ''):  # If any item in first rucksack is in second and third
+    rucksackGroup = [r.replace('\n', '') for r in rucksackGroup]
+    for item in rucksackGroup[0]:
+        if item in rucksackGroup[1] and item in rucksackGroup[2]:  # If any item in first rucksack is in second and third
             prioritiesSum += itemToPriority(item)  # Add this items priority value
             break  # Go to next group of 3s
 
