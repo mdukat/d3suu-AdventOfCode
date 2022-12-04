@@ -31,3 +31,21 @@ for pair in data:
         containPairs += 1
 
 print("Part 1: " + str(containPairs))
+
+### Part 2
+
+overlapPairs = 0
+
+for pair in data:
+    aMin = pair[0][0]
+    aMax = pair[0][1]
+    bMin = pair[1][0]
+    bMax = pair[1][1]
+
+    for a in range(aMin, aMax+1):
+        # print(str(aMin) + " " + str(aMax) + " = " + str(a))
+        if a in range(bMin, bMax+1):
+            overlapPairs += 1
+            break
+
+print("Part 2: " + str(overlapPairs))
