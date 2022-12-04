@@ -42,10 +42,9 @@ for pair in data:
     bMin = pair[1][0]
     bMax = pair[1][1]
 
-    for a in range(aMin, aMax+1):
-        # print(str(aMin) + " " + str(aMax) + " = " + str(a))
-        if a in range(bMin, bMax+1):
-            overlapPairs += 1
+    for a in range(aMin, aMax+1):     # For every number in A
+        if a in range(bMin, bMax+1):  # Check if it's in B
+            overlapPairs += 1         # If it is, +1 and go to next one
             break
 
 print("Part 2: " + str(overlapPairs))
